@@ -5,31 +5,24 @@ buildscript {
         compileSdkVersion = 35
         targetSdkVersion = 35
         ndkVersion = "27.1.12297006"
-        kotlinVersion = "2.0.21"
+        kotlinVersion = "1.8.21"
+        androidGradlePluginVersion = "8.1.1"
     }
+
     repositories {
         google()
         mavenCentral()
     }
+
     dependencies {
-        classpath("com.android.tools.build:gradle")
+        classpath("com.android.tools.build:gradle:${androidGradlePluginVersion}")
         classpath("com.facebook.react:react-native-gradle-plugin")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
     }
 }
 
 apply plugin: "com.facebook.react.rootproject"
 
-// Enforce SDK versions on all subprojects (native modules) including tflite-react-native
-subprojects {
-    afterEvaluate { project ->
-        if (project.hasProperty("android")) {
-            android {
-                // Ensure compileSdkVersion is at least 30 for Java 9+ compatibility
-                compileSdkVersion = rootProject.ext.compileSdkVersion >= 30 ? rootProject.ext.compileSdkVersion : 30
-                buildToolsVersion = rootProject.ext.buildToolsVersion
-                targetSdkVersion = rootProject.ext.targetSdkVersion
-            }
-        }
-    }
-}
+// ❌ REMOVE THIS:
+// subprojects { ... }
+// or anything setting compileSdk/buildTools

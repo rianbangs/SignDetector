@@ -4,6 +4,11 @@
 //  npm run android
 
 
+//generate APK file
+// cd android
+// ./gradlew assembleDebug
+//The APK will be generated at:   android/app/build/outputs/apk/debug/app-debug.apk
+
 import React from 'react';
 import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 import CameraScreen from './src/screens/CameraScreen'; // 👈 Make sure this path matches your file location
